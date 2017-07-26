@@ -35,11 +35,11 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
  * Create a base directory to hold files e.g (/home/<user>/aws_iot_mesh)
  * Change directory to this new directory
  * Download or clone pi_iotAWS_rf24Mesh
-    * Download: wget
-    * Clone: git clone 
+    * Download: wget https://github.com/aaronjense/pi_iotAWS_rf24Mesh/archive/master.zip
+    * Clone: git clone https://github.com/aaronjense/pi_iotAWS_rf24Mesh.git
  * Download and Expand the AWS IoT embedded C SDK
 	* Download:       wget https://github.com/aws/aws-iot-device-sdk-embedded-C/archive/master.zip
-	* Expand tarball: unzip master.zip 
+	* Unzip: unzip master.zip 
  * Download external_libs files for AWS IoT embedded C SDK
 	* Change Directory:  /aws-iot-device-sdk-embedded-C-master/external_libs/CppUTest
 	* View the README.txt that has link for cppUTest github download or Download by: wget https://github.com/cpputest/cpputest/archive/v3.6.zip
