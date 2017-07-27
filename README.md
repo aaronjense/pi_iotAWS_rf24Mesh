@@ -52,7 +52,6 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 	   * cd mbedtls-2.1.1
 	   * make and make check. Alternative instructions in mbedtls-2.1.1/README.md
 * Edit aws-iot-device-sdk-embedded-C-master/aws_iot_config.h
-NOTE: aws_iot_config.h needs to be edited with your certification details
 	   * AWS_IOT_MQTT_HOST: This is found from the AWS IoT console, Registry, Things, <your_thing>,
 				Click interact on the left panel, and under HTTPS is the Rest API Endpoint
 	   * AWS_IOT_MQTT_PORT: You can keep default
