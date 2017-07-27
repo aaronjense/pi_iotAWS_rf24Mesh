@@ -1,4 +1,3 @@
-
 Overview
 
 Raspberry Pi variants are low cost options to act as a master node in mesh networking and a gateway to Amazon Web Services(AWS).
@@ -10,11 +9,6 @@ than a Raspberry Pi or other Linux driven device that allows AWS authentication.
 
 The trade off is that the data transmitted with a nRF24L01/low cost microcontroller might be intercepted locally on the way to the master node.
 Further work on encryption is a priority.
-
-Design Goals
-
-
-
 -------------------------------------------------------------------------------------------
 piMaster_dynamoMesh_temp
 
@@ -24,13 +18,8 @@ data payload to the Raspberry Pi which is connected to AWS IoT platform using MQ
 A rule made on AWS IoT can perform specified actions based on messages published to a topic.  In this case, a rule was made for the topic "Sensor/temp/<nodeID>" to
 store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Service).
 
-
 ##Getting Started
-
-##Steps:
-
 ###Setup directories on Raspberry Pi
-
 ####AWS IOT Embedded C SDK
  * Create a base directory to hold files e.g (/home/<user>/aws_iot_mesh)
  * Change directory to this new directory
@@ -63,7 +52,6 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 	      * you can edit the file so that it reads <THING>.cert so that it is uniqely identified
 	   * AWS_IOT_PRIVATE_KEY_FILENAME:  Same as the CERTIFICATE but enter the private key.  If you dont change the name then 
 	      * enter it similiarly to how you downloaded it.
-
 / USER CONFIG EXAMPLE:  Obtain certification after registering "thing" on AWS IoT.
 // =================================================
 #define AWS_IOT_MQTT_HOST              "xxxxxxxxxxxxx.iot.us-xxxx-x.amazonaws.com" ///< Customer specific MQTT HOST. The same will be used for Thing Shadow
@@ -73,9 +61,6 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 #define AWS_IOT_ROOT_CA_FILENAME       "root-CA.crt" ///< Root CA file name
 #define AWS_IOT_CERTIFICATE_FILENAME   "THING.cert.pem" ///< device signed certificate file name
 #define AWS_IOT_PRIVATE_KEY_FILENAME   "THING.private.key" ///< Device private key filename
-// =================================================
-
-* Explore /aws-iot-device-sdk-embedded-C-master/ and view README.md for inisght
 
 ####nRF24/RF24Mesh
 * Change to Base Directory
@@ -83,9 +68,7 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
    * wget https://github.com/nRF24/RF24Mesh/archive/master.zip
    * unzip master.zip
 * Explore RF24Mesh-master contents and https://tmrh20.github.io/RF24Mesh/ for insight
-
 ####Understanding AWS IoT, obtaining x.509 certificates and AWS credentials
-
  * Read:    [AWS IoT developer guide](http://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html)
  * Sign Up: [AWS IoT Services](https://aws.amazon.com/iot/)
  * Connect IoT Device:
@@ -101,7 +84,6 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
           * Policy name can be your THING name
 	  * Action: "iot:*, dynamodb:*"
           * Resource: "*"
-		
 ###Setting up AWS IoT Rules and dynamoDB
   * From AWS IoT Console (https://aws.amazon.com/iot/):  Click on "Rules" in left column and "Create" on upper right
   * Fill in Create a rule:
@@ -133,4 +115,3 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
     NOTE: An alternative method of setting up Rules and AWS IoT in general is using the AWS CLI and json files.
 	  [AWS CLI](https://aws.amazon.com/cli/)
 	  [JSON for Parameters](https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-
