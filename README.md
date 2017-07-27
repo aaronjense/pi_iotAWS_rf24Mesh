@@ -55,8 +55,8 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 	* AWS_IOT_PRIVATE_KEY_FILENAME:  Same as the CERTIFICATE but enter the private key.  If you dont change the name then 
 	   * enter it similiarly to how you downloaded it.
 
-/ USER CONFIG EXAMPLE:  Obtain certification after registering "thing" on AWS IoT.
-// =================================================
+USER CONFIG EXAMPLE:  Obtain certification after registering "thing" on AWS IoT.
+
 #define AWS_IOT_MQTT_HOST              "xxxxxxxxxxxxx.iot.us-xxxx-x.amazonaws.com" ///< Customer specific MQTT HOST. The same will be used for Thing Shadow
 #define AWS_IOT_MQTT_PORT              8883 ///< default port for MQTT/S
 #define AWS_IOT_MQTT_CLIENT_ID         "THING" ///< MQTT client ID should be unique for every device
@@ -123,5 +123,7 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 	NOTE: IAM is how AWS grants users and groups permissions for various services.
 
         NOTE: An alternative method of setting up Rules and AWS IoT in general is using the AWS CLI and json files.
+
 	  [AWS CLI](https://aws.amazon.com/cli/)
+
 	  [JSON for Parameters](https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
