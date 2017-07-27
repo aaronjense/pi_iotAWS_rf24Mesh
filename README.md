@@ -6,10 +6,9 @@ sensor nodes until reaching the master/gateway that supports AWS authentication.
 
 The benefit of this is that the combination of a nRF24L01 radio and arduino or other embedded platform is typically less money 
 than a Raspberry Pi or other Linux driven device that allows AWS authentication.
-
 The trade off is that the data transmitted with a nRF24L01/low cost microcontroller might be intercepted locally on the way to the master node.
 Further work on encryption is a priority.
--------------------------------------------------------------------------------------------
+
 piMaster_dynamoMesh_temp
 
 This basic prgram connects a Raspberry Pi (tested with Pi Zero Wi-Fi) to AWS IoT, AWS dynamoDB and a local mesh network. The mesh network consists of
@@ -18,9 +17,12 @@ data payload to the Raspberry Pi which is connected to AWS IoT platform using MQ
 A rule made on AWS IoT can perform specified actions based on messages published to a topic.  In this case, a rule was made for the topic "Sensor/temp/<nodeID>" to
 store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Service).
 
-##Getting Started
-###Setup directories on Raspberry Pi
-####AWS IOT Embedded C SDK
+## Getting Started
+
+### Setup directories on Raspberry Pi
+
+#### AWS IOT Embedded C SDK
+
  * Create a base directory to hold files e.g (/home/<user>/aws_iot_mesh)
  * Change directory to this new directory
  * Download or clone pi_iotAWS_rf24Mesh
@@ -52,6 +54,7 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 	      * you can edit the file so that it reads <THING>.cert so that it is uniqely identified
 	   * AWS_IOT_PRIVATE_KEY_FILENAME:  Same as the CERTIFICATE but enter the private key.  If you dont change the name then 
 	      * enter it similiarly to how you downloaded it.
+
 / USER CONFIG EXAMPLE:  Obtain certification after registering "thing" on AWS IoT.
 // =================================================
 #define AWS_IOT_MQTT_HOST              "xxxxxxxxxxxxx.iot.us-xxxx-x.amazonaws.com" ///< Customer specific MQTT HOST. The same will be used for Thing Shadow
@@ -62,13 +65,14 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 #define AWS_IOT_CERTIFICATE_FILENAME   "THING.cert.pem" ///< device signed certificate file name
 #define AWS_IOT_PRIVATE_KEY_FILENAME   "THING.private.key" ///< Device private key filename
 
-####nRF24/RF24Mesh
+#### nRF24/RF24Mesh
 * Change to Base Directory
 * Download RF24Mesh-master.zip
    * wget https://github.com/nRF24/RF24Mesh/archive/master.zip
    * unzip master.zip
 * Explore RF24Mesh-master contents and https://tmrh20.github.io/RF24Mesh/ for insight
-####Understanding AWS IoT, obtaining x.509 certificates and AWS credentials
+#### Understanding AWS IoT, obtaining x.509 certificates and AWS credentials
+
  * Read:    [AWS IoT developer guide](http://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html)
  * Sign Up: [AWS IoT Services](https://aws.amazon.com/iot/)
  * Connect IoT Device:
@@ -84,7 +88,8 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
           * Policy name can be your THING name
 	  * Action: "iot:*, dynamodb:*"
           * Resource: "*"
-###Setting up AWS IoT Rules and dynamoDB
+
+### Setting up AWS IoT Rules and dynamoDB
   * From AWS IoT Console (https://aws.amazon.com/iot/):  Click on "Rules" in left column and "Create" on upper right
   * Fill in Create a rule:
      * Name: Some description e.g. (<insert_thing_name>TempData)
@@ -92,6 +97,7 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
      * Rule query statement: 
         * Attribute: *
 	* Topic Filter: "Sensor/temp/#"
+
 	NOTE: '#', '+', and '*' are wildcards for topics
 	* Condition: Leave blank, later on you can change this e.g. (temperature > 75)
      * Add Action
@@ -104,14 +110,18 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
 	   * Create
         * Choose your newly created Table under "Table name"
 	* In *Hash key value, fill in "${topic(3)}" without the quotes
+
 	NOTE: This means when you publish to the topic chosen for the rule, the third entry of the topic will be selected to partition
 	      the dynamoDB under nodeID. e.g(<nodeID> will be the third topic for Sensor/temp/<nodeID>). Since the nodes will send their
 	      unique id in their payload, the topic can dynamically change based on various nodeIDs and have that payload sorted into dynamoDB.
 	* In "Range key value", fill in "${timestamp()}
+
 	NOTE: This will add a timestamp to the published payload message so that dynamoDB fills up based on timestamp instead of overwriting the same
 	      field everytime a new payload message is published.
 	* Create a new role under *IAM role name
+
 	NOTE: IAM is how AWS grants users and groups permissions for various services.
-    NOTE: An alternative method of setting up Rules and AWS IoT in general is using the AWS CLI and json files.
+
+        NOTE: An alternative method of setting up Rules and AWS IoT in general is using the AWS CLI and json files.
 	  [AWS CLI](https://aws.amazon.com/cli/)
 	  [JSON for Parameters](https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
