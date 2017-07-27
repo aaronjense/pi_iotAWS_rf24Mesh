@@ -42,18 +42,18 @@ store the publish message (node payload) in dynamoDB (NoSQL Cloud Database Servi
            * unzip mbedtls-2.1.1.zip
 	   * cd mbedtls-2.1.1
 	   * make and make check. Alternative instructions in mbedtls-2.1.1/README.md
-* Edit aws-iot-device-sdk-embedded-C-master/aws_iot_config.h
-	   * AWS_IOT_MQTT_HOST: This is found from the AWS IoT console, Registry, Things, <your_thing>, 
-	      * Click interact on the left panel, and under HTTPS is the Rest API Endpoint
-	   * AWS_IOT_MQTT_PORT: You can keep default
-	   * AWS_IOT_MQTT_CLIENT_ID: Click on "Details" under your thing on AWS IoT console,
-	      * under Thing ARN, your client id is the name after ":thing/"
-	   * AWS_IOT_MY_THING_NAME:  Same as AWS_IOT_MQTT_CLIENT_ID
-	   * AWS_IOT_ROOT_CA_FILENAME:  Unless you changed the name then it most likely is root-CA.crt
-	   * AWS_IOT_CERTIFICATE_FILENAME:  Your downloaded file may look like <random_characters>.cert.pem
-	      * you can edit the file so that it reads <THING>.cert so that it is uniqely identified
-	   * AWS_IOT_PRIVATE_KEY_FILENAME:  Same as the CERTIFICATE but enter the private key.  If you dont change the name then 
-	      * enter it similiarly to how you downloaded it.
+ * Edit aws-iot-device-sdk-embedded-C-master/aws_iot_config.h
+	* AWS_IOT_MQTT_HOST: This is found from the AWS IoT console, Registry, Things, <your_thing>, 
+	   * Click interact on the left panel, and under HTTPS is the Rest API Endpoint
+	* AWS_IOT_MQTT_PORT: You can keep default
+	* AWS_IOT_MQTT_CLIENT_ID: Click on "Details" under your thing on AWS IoT console,
+	   * under Thing ARN, your client id is the name after ":thing/"
+	* AWS_IOT_MY_THING_NAME:  Same as AWS_IOT_MQTT_CLIENT_ID
+	* AWS_IOT_ROOT_CA_FILENAME:  Unless you changed the name then it most likely is root-CA.crt
+	* AWS_IOT_CERTIFICATE_FILENAME:  Your downloaded file may look like <random_characters>.cert.pem
+	   * you can edit the file so that it reads <THING>.cert so that it is uniqely identified
+	* AWS_IOT_PRIVATE_KEY_FILENAME:  Same as the CERTIFICATE but enter the private key.  If you dont change the name then 
+	   * enter it similiarly to how you downloaded it.
 
 / USER CONFIG EXAMPLE:  Obtain certification after registering "thing" on AWS IoT.
 // =================================================
